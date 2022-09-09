@@ -1,0 +1,337 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *Must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Candidate Add Item</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico'%}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area d-flex justify-content-between align-items-center">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
+                <a href="#"><span>Email:</span> info@clever.com</a>
+            </div>
+            <!-- Follow Us -->
+            <div class="follow-us">
+                <span>Follow us</span>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="clever-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="cleverNav">
+
+                    <!-- Logo -->
+                    <a href="{% url 'index' %}"><h3>TALENTEXPO</h3></a>
+{% if request.session.username %}
+
+                      <li style="color:red;"><a style="color:#b50909;">Your role is {{request.session.role}}</a></li>
+
+                     {%endif%}
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <li><a href="{% url 'index' %}">Home</a></li>
+                                <li><a href="{% url 'gallery' %}">Gallery</a>
+
+                                </li>
+                                <li><a href="{% url 'view_talents' %}">View Talents</a></li>
+
+
+                                {% if request.session.username %}
+
+{% if  request.session.role == "Candidate" %}
+                      <li><a href="#">Options</a>
+                                <ul class="dropdown">
+                                <li><a href="{% url 'up_files' %}">Upload Files</a></li>
+                                <li><a href="{% url 'tedit' %}">Modify</a></li>
+                                    </ul>
+                      </li>
+
+                         {%endif%}
+
+
+{%endif%}
+
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a><br></a></li>
+                            </ul>
+
+                            <!-- Search Button
+                            <div class="search-area">
+                                <form action="#" method="post">
+                                    <input type="search" name="search" id="search" placeholder="Search">
+                                    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                            </div> -->
+
+                            <!-- Register / Login -->
+                            {% if request.session.username %}
+
+                            <div class="register-login-area">
+                                <a href="{% url 'logout' %}" class="btn active" onclick="alert('Are you sure you want to logout ?');">Logout</a>
+                            </div>
+                            {%endif%}
+
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area">
+        <!-- Breadcumb -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Add item</a></li>
+                <li class="breadcrumb-item"><a href="#">Edit item</a></li>
+            </ol>
+        </nav>
+    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+
+	<div class="clever-catagory bg-img d-flex align-items-center justify-content-center p-3">
+                <h3>Edit Item</h3>
+				<br>
+            </div>
+
+
+   <!-- IPSR Content start -->
+
+
+
+     <div class="blog-details-content section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="blog-details-text">
+                        <div class="container col-6">
+
+
+
+
+
+
+
+
+
+
+
+            <div class="line">
+            <div class="margin">
+               <div class="s-12 m-12 l-8 margin-bottom">
+                  <div class="box">
+                       {% if  request.session.role == "Candidate" %}
+                        <a style="color:#b50909;margin-left:15px;">Your role is {{request.session.role}}</a>
+                         {%endif%}
+                             <h3>Publish Your Talents</h3>
+
+
+                     <div class="aside-nav" style="line-hight:5px;padding-top:5px;">
+                         {% if msg%}
+                         <div style="margin-top:10px;margin-bottom:10px;color:red">{{msg}}</div>
+                         {%endif%}
+                         <form action="{% url 'updateProf' id=tal.id  %}" method="post" enctype="multipart/form-data" >
+     {% csrf_token %}
+
+
+                             <div class="">
+                <font size="4">
+                    <label>Title</label>
+                <input class="form-control" type="text" name="title" value="{{tal.title}}" required>
+
+                </font>
+            </div><br>
+             <div class="">
+                <font size="4">
+                    <label>Type</label>
+                <input class="form-control" type="text" name="type" value="{{tal.type}}" required>
+
+                </font>
+            </div><br>
+            <div class="">
+                <font size="4">
+                    <label>Description</label>
+                <input type="text" class="form-control" name="desc1" value="{{tal.desc}}" required>
+
+                </font>
+            </div><br>
+            <div class="">
+                <font size="4">
+                    <img src="/media/{{tal.files}}" height="150px" width="150px">
+                    <br>
+                    <br>
+                    <label>Upload new photo</label>
+                <input type="file" class="form-control" name="photo" required>
+
+                </font>
+            </div><br>
+
+
+
+                             <button type="submit"  class="btn btn-success" value="Update">Save</button>
+                             <button type="reset"  class="btn btn-reset" value="Cancel">Cancel</button>
+ </form><br><br>
+                     </div>
+                  </div>
+               </div>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+
+            </div>
+         </div>
+
+
+
+
+</div>
+            </div>
+        </div>
+     </div>
+
+
+
+<!-- IPSR Content end -->
+
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <!-- Top Footer Area -->
+        <div class="top-footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Footer Logo -->
+                        <div class="footer-logo">
+                            <a href="index.html"><img src="{% static 'img/core-img/logo2.png'%}" alt=""></a>
+                        </div>
+                        <!-- Copywrite -->
+                        <p><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Footer Area -->
+        <div class="bottom-footer-area d-flex justify-content-between align-items-center">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <a href="#"><span>Phone:</span> +44 300 303 0266</a>
+                <a href="#"><span>Email:</span> info@clever.com</a>
+            </div>
+            <!-- Follow Us -->
+            <div class="follow-us">
+                <span>Follow us</span>
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js'%}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js'%}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js'%}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js'%}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js'%}"></script>
+
+
+     <script type="text/javascript" src="{% static 'js/responsee.js' %}"></script>
+      <script type="text/javascript" src="{% static 'owl-carousel/owl.carousel.js'%}"></script>
+      <script type="text/javascript">
+        jQuery(document).ready(function($) {
+          var owl = $('#header-carousel');
+          owl.owlCarousel({
+            nav: true,
+            dots: true,
+            items: 1,
+            loop: true,
+            navText: ["&#xf007","&#xf006"],
+            autoplay: true,
+            autoplayTimeout: 3000
+          });
+          var owl = $('#gallery-carousel');
+          owl.owlCarousel({
+            nav: false,
+            dots: true,
+            loop: true,
+            navText: ["&#xf007","&#xf006"],
+            autoplay: true,
+            autoplayTimeout: 3000,
+            responsive: {
+              0: {
+                items: 1
+              },
+              769: {
+                items: 2
+              },
+              960: {
+                items: 4
+              }
+            }
+          });
+        })
+      </script>
+</body>
+
+</html>

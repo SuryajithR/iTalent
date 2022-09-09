@@ -1,0 +1,5 @@
+from django.contrib import siteadmin
+from.models import signup
+from.models import talent_uploads
+siteadmin.site.register(signup)
+siteadmin.site.register(talent_uploads)
